@@ -7,11 +7,13 @@
   <meta name="description" content="A browser-only vendor risk scoring tool for small businesses.">
   <link rel="stylesheet" href="styles/tokens.css">
   <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/print.css">
 </head>
 <body>
   <header class="site-header">
     <div class="wordmark">THIRDPARTY<span>TRUST</span></div>
     <p class="tagline">Vendor risk, graded in your browser.</p>
+    <p class="print-subtitle">Vendor Risk Compliance Task Sheet</p>
   </header>
 
   <main class="assessment">
@@ -77,6 +79,7 @@
         <p class="seal-status">AWAITING ASSESSMENT</p>
         <p class="seal-empty-copy">Complete the questionnaire to generate a grade.</p>
       </div>
+      <button type="button" id="export-task-sheet" class="primary-action" style="display: none;">Export task sheet</button>
     </aside>
   </main>
 
