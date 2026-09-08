@@ -1,0 +1,58 @@
+/* ThirdPartyTrust — print-only styles for the exported task sheet */
+
+@media print {
+  @page {
+    margin: 0.5in;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .assessment-form,
+  #export-task-sheet,
+  .site-footer {
+    display: none;
+  }
+
+  .assessment {
+    display: block;
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .site-header {
+    text-align: center;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .tagline {
+    display: none;
+  }
+
+  .print-subtitle {
+    display: block;
+    color: var(--fog-gray);
+    font-size: 0.85rem;
+    margin: 0.25rem 0 0;
+  }
+
+  .result-panel {
+    position: static;
+    max-width: 400px;
+    margin: 2rem auto 0;
+  }
+
+  .result-seal {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .result-breakdown {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    page-break-inside: avoid;
+  }
+}
