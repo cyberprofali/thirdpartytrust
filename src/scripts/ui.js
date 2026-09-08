@@ -4,6 +4,7 @@ const form = document.getElementById("assessment-form");
 const button = document.getElementById("run-assessment");
 const seal = document.querySelector(".result-seal");
 const panel = document.querySelector(".result-panel");
+const exportButton = document.getElementById("export-task-sheet");
 
 function getSelectedValue(name) {
   const checked = form.querySelector(`input[name="${name}"]:checked`);
@@ -21,6 +22,7 @@ function clearBreakdown() {
 
 function showIncomplete() {
   clearBreakdown();
+  exportButton.style.display = "none";
   seal.textContent = "";
   seal.classList.add("is-empty");
 
@@ -62,7 +64,7 @@ function renderBreakdown(result) {
     breakdown.append(row);
   });
 
-  panel.append(breakdown);
+  panel.insertBefore(breakdown, exportButton);
 }
 
 function showResult(vendorName, result) {
@@ -83,6 +85,7 @@ function showResult(vendorName, result) {
 
   seal.append(grade, label, score);
   renderBreakdown(result);
+  exportButton.style.display = "block";
 }
 
 button.addEventListener("click", () => {
@@ -105,4 +108,8 @@ button.addEventListener("click", () => {
   });
 
   showResult(vendorName, result);
+});
+
+exportButton.addEventListener("click", () => {
+  window.print();
 });
