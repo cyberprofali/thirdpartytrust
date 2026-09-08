@@ -11,9 +11,12 @@
   }
 
   .assessment-form,
-  #export-task-sheet,
   .site-footer {
     display: none;
+  }
+
+  #export-task-sheet {
+    display: none !important;
   }
 
   .assessment {
