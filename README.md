@@ -38,3 +38,9 @@ as a printable compliance task sheet.
 
 See docs/ARCHITECTURE.md for a full technical breakdown of how scoring, governance
 mapping, and export work.
+
+### Checek In 9/12
+
+- Adding more CIS controls (CIS v8.1)[https://www.cisecurity.org/controls/v8-1]
+
+- I would do it via control type 
