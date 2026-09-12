@@ -19,7 +19,7 @@ compliance task sheet — all of it running in the browser, with nothing sent to
 - [x] Scoring engine
 - [x] Governance matrix (CIS Controls v8)
 - [x] Export and reporting
-- [ ] Documentation and polish
+- [x] Documentation and polish
 - [ ] Testing evidence
 
 ## Stack
@@ -33,3 +33,8 @@ Scoring logic is mapped to CIS Critical Security Controls v8, primarily Control 
 Protection) and Control 6 (Access Control Management). Every grade displays its
 per-category breakdown with the specific control it reflects, and can be exported
 as a printable compliance task sheet.
+
+## Documentation
+
+See docs/ARCHITECTURE.md for a full technical breakdown of how scoring, governance
+mapping, and export work.
