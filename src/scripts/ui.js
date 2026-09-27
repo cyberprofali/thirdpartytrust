@@ -19,13 +19,16 @@ function getAllSafeguardAnswers() {
   return answers;
 }
 
-function clearBreakdown() {
-  const existing = panel.querySelector(".result-breakdown");
-  if (existing) existing.remove();
+function clearPrintSections() {
+  const ids = [".result-breakdown", ".exec-summary", ".risk-register", ".risk-heatmap"];
+  ids.forEach((selector) => {
+    const existing = panel.querySelector(selector);
+    if (existing) existing.remove();
+  });
 }
 
 function showIncomplete() {
-  clearBreakdown();
+  clearPrintSections();
   exportButton.style.display = "none";
   seal.textContent = "";
   seal.classList.add("is-empty");
@@ -47,9 +50,165 @@ const TIER_LABELS = {
   none: "Not implemented",
 };
 
-function renderBreakdown(result) {
-  clearBreakdown();
+function riskClass(level) {
+  if (level === "High") return "risk-high";
+  if (level === "Moderate") return "risk-moderate";
+  return "risk-low";
+}
 
+function renderExecSummary(result, vendorName) {
+  const wrap = document.createElement("div");
+  wrap.className = "exec-summary";
+
+  const heading = document.createElement("p");
+  heading.className = "breakdown-heading";
+  heading.textContent = "Executive Summary";
+  wrap.append(heading);
+
+  const meta = document.createElement("p");
+  meta.className = "breakdown-citation";
+  meta.textContent = "Assessment ID: " + result.executiveSummary.assessmentId + "  |  Date: " + result.executiveSummary.date;
+  wrap.append(meta);
+
+  const summaryText = document.createElement("p");
+  summaryText.className = "exec-summary-text";
+  const es = result.executiveSummary;
+  let exposureText = "no families rated High risk.";
+  if (es.highRiskFamilies.length > 0) {
+    exposureText = "primary exposure in: " + es.highRiskFamilies.join(", ") + ".";
+  }
+  summaryText.textContent =
+    (vendorName || "This vendor") + " scored " + result.grade + " (" + result.score + "/100) against " + result.framework +
+    ". Of 35 evaluated safeguards, " + es.fullCount + " are fully implemented, " + es.partialCount +
+    " partially implemented, and " + es.noneCount + " not implemented. Based on the stated data sensitivity, " + exposureText;
+  wrap.append(summaryText);
+
+  panel.append(wrap);
+}
+
+function renderRiskRegister(result) {
+  const wrap = document.createElement("div");
+  wrap.className = "risk-register";
+
+  const heading = document.createElement("p");
+  heading.className = "breakdown-heading";
+  heading.textContent = "Risk Register";
+  wrap.append(heading);
+
+  const table = document.createElement("table");
+  table.className = "register-table";
+
+  const thead = document.createElement("thead");
+  const headRow = document.createElement("tr");
+  ["Risk Area", "Likelihood", "Impact", "Risk Level", "Recommended Action"].forEach((label) => {
+    const th = document.createElement("th");
+    th.textContent = label;
+    headRow.append(th);
+  });
+  thead.append(headRow);
+  table.append(thead);
+
+  const tbody = document.createElement("tbody");
+  result.riskRegister.forEach((entry) => {
+    const row = document.createElement("tr");
+
+    const areaCell = document.createElement("td");
+    const areaName = document.createElement("p");
+    areaName.className = "register-area-name";
+    areaName.textContent = entry.family;
+    const areaDesc = document.createElement("p");
+    areaDesc.className = "register-area-desc";
+    areaDesc.textContent = entry.riskDescription;
+    areaCell.append(areaName, areaDesc);
+
+    const likelihoodCell = document.createElement("td");
+    likelihoodCell.textContent = entry.likelihood;
+
+    const impactCell = document.createElement("td");
+    impactCell.textContent = entry.impact;
+
+    const levelCell = document.createElement("td");
+    const badge = document.createElement("span");
+    badge.className = "risk-badge " + riskClass(entry.riskLevel);
+    badge.textContent = entry.riskLevel;
+    levelCell.append(badge);
+
+    const actionCell = document.createElement("td");
+    actionCell.textContent = entry.recommendedAction;
+
+    row.append(areaCell, likelihoodCell, impactCell, levelCell, actionCell);
+    tbody.append(row);
+  });
+  table.append(tbody);
+  wrap.append(table);
+
+  panel.append(wrap);
+}
+
+const LEVELS = ["Low", "Moderate", "High"];
+
+// Single source of truth for the heat map's cell coloring -- mirrors the
+// RISK_MATRIX in scoring-engine.js exactly, so the two never drift apart.
+const HEATMAP_RISK_MATRIX = {
+  Low: { Low: "Low", Moderate: "Low", High: "Moderate" },
+  Moderate: { Low: "Low", Moderate: "Moderate", High: "High" },
+  High: { Low: "Moderate", Moderate: "High", High: "High" },
+};
+
+function renderHeatMap(result) {
+  const wrap = document.createElement("div");
+  wrap.className = "risk-heatmap";
+
+  const heading = document.createElement("p");
+  heading.className = "breakdown-heading";
+  heading.textContent = "Risk Heat Map";
+  wrap.append(heading);
+
+  const grid = document.createElement("div");
+  grid.className = "heatmap-grid";
+
+  grid.append(document.createElement("div"));
+  LEVELS.forEach((lvl) => {
+    const colLabel = document.createElement("div");
+    colLabel.className = "heatmap-axis-label";
+    colLabel.textContent = lvl;
+    grid.append(colLabel);
+  });
+
+  [...LEVELS].reverse().forEach((impactLevel) => {
+    const rowLabel = document.createElement("div");
+    rowLabel.className = "heatmap-axis-label";
+    rowLabel.textContent = impactLevel;
+    grid.append(rowLabel);
+
+    LEVELS.forEach((likelihoodLevel) => {
+      const cell = document.createElement("div");
+      const riskLevel = HEATMAP_RISK_MATRIX[impactLevel][likelihoodLevel];
+      cell.className = "heatmap-cell " + riskClass(riskLevel);
+
+      const matches = result.riskRegister.filter((r) => r.impact === impactLevel && r.likelihood === likelihoodLevel);
+      matches.forEach((m) => {
+        const chip = document.createElement("span");
+        chip.className = "heatmap-chip";
+        chip.textContent = m.family;
+        cell.append(chip);
+      });
+
+      grid.append(cell);
+    });
+  });
+
+  wrap.append(grid);
+
+  const axisNote = document.createElement("p");
+  axisNote.className = "breakdown-citation";
+  axisNote.textContent = "Columns: Likelihood. Rows: Impact.";
+  wrap.append(axisNote);
+
+  panel.append(wrap);
+}
+
+function renderBreakdown(result) {
   const breakdown = document.createElement("div");
   breakdown.className = "result-breakdown";
 
@@ -87,7 +246,7 @@ function renderBreakdown(result) {
     });
   });
 
-  panel.insertBefore(breakdown, exportButton);
+  panel.append(breakdown);
 }
 
 function showResult(vendorName, result) {
@@ -107,7 +266,13 @@ function showResult(vendorName, result) {
   score.textContent = result.score + " / 100";
 
   seal.append(grade, label, score);
+
+  clearPrintSections();
+  renderExecSummary(result, vendorName);
+  renderRiskRegister(result);
+  renderHeatMap(result);
   renderBreakdown(result);
+
   exportButton.style.display = "block";
 }
 
