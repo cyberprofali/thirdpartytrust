@@ -41,6 +41,15 @@
           </select>
         </div>
 
+        <fieldset class="field-group">
+          <legend>What kind of data does this vendor handle?</legend>
+          <p class="family-caption">Used to determine potential impact if this vendor is compromised.</p>
+          <label class="option"><input type="radio" name="data-sensitivity" value="public" required> Public information only</label>
+          <label class="option"><input type="radio" name="data-sensitivity" value="internal"> Internal business data</label>
+          <label class="option"><input type="radio" name="data-sensitivity" value="customer"> Customer or employee records</label>
+          <label class="option"><input type="radio" name="data-sensitivity" value="regulated"> Regulated data (health, financial, etc.)</label>
+        </fieldset>
+
         <fieldset class="field-group family-group">
           <legend>Data Protection & Privacy</legend>
           <p class="family-caption">CIS Control 3 — Data Protection</p>
