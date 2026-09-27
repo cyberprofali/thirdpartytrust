@@ -44,19 +44,38 @@
 
   .result-panel {
     position: static;
-    max-width: 400px;
-    margin: 2rem auto 0;
+    max-width: 100%;
+    margin: 2rem 0 0;
   }
 
   .result-seal {
+    max-width: 320px;
+    margin: 0 auto;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
 
+  .exec-summary,
+  .risk-register,
+  .risk-heatmap,
   .result-breakdown {
     display: block;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+  }
+
+  .exec-summary {
+    page-break-before: always;
+  }
+
+  .register-table,
+  .heatmap-grid {
     page-break-inside: avoid;
+  }
+
+  .risk-badge,
+  .heatmap-cell {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 }
