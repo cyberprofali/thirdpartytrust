@@ -1,4 +1,4 @@
-/* ThirdPartyTrust brand tokens — colors and type, matched to the proposal cover */
+/* ThirdPartyTrust brand tokens -- colors and type, matched to the proposal cover */
 
 :root {
   /* Colors */
@@ -9,11 +9,12 @@
   --paper-white: #FFFFFF;
   --gold-signal: #C9A227;
 
-  /* Grade-status colors — used only inside the results seal */
+  /* Grade-status and risk-level colors */
   --verified-green: #2E6F63;
   --alert-red: #B23A32;
+  --caution-amber: #B8860B;
 
-  /* Type — system stacks, so nothing loads from an external font service */
+  /* Type -- system stacks, so nothing loads from an external font service */
   --font-display: "Arial Narrow", Arial, "Helvetica Neue", sans-serif;
   --font-body: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --font-data: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
