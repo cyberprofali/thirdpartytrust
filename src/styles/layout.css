@@ -215,7 +215,10 @@ button:focus-visible {
   margin: 0.5rem 0 0;
 }
 
-.result-breakdown {
+.result-breakdown,
+.exec-summary,
+.risk-register,
+.risk-heatmap {
   display: none;
   margin-top: 1.5rem;
   border: 1px solid var(--fog-gray);
@@ -252,6 +255,105 @@ button:focus-visible {
   font-size: 0.78rem;
   color: var(--charcoal);
   margin: 0.15rem 0 0;
+}
+
+.exec-summary-text {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0.5rem 0 0;
+}
+
+.register-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.register-table th {
+  text-align: left;
+  font-family: var(--font-data);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--slate-gray);
+  padding: 0.5rem 0.5rem;
+  border-bottom: 2px solid var(--ink-black);
+}
+
+.register-table td {
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid var(--fog-gray);
+  vertical-align: top;
+}
+
+.register-area-name {
+  font-weight: 600;
+  margin: 0 0 0.2rem;
+}
+
+.register-area-desc {
+  font-size: 0.78rem;
+  color: var(--charcoal);
+  margin: 0;
+}
+
+.risk-badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--paper-white);
+}
+
+.risk-low {
+  background: var(--verified-green);
+}
+
+.risk-moderate {
+  background: var(--caution-amber);
+}
+
+.risk-high {
+  background: var(--alert-red);
+}
+
+.heatmap-grid {
+  display: grid;
+  grid-template-columns: 70px repeat(3, 1fr);
+  gap: 4px;
+}
+
+.heatmap-axis-label {
+  font-family: var(--font-data);
+  font-size: 0.7rem;
+  color: var(--slate-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0.25rem;
+}
+
+.heatmap-cell {
+  min-height: 60px;
+  padding: 0.4rem;
+  border-radius: 3px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 3px;
+}
+
+.heatmap-chip {
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--ink-black);
+  font-size: 0.62rem;
+  font-weight: 600;
+  padding: 0.15rem 0.35rem;
+  border-radius: 2px;
+  line-height: 1.2;
 }
 
 .site-footer {
