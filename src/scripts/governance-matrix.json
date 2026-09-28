@@ -1,87 +1,436 @@
 {
-  "version": "2.0.0",
-  "framework": "CIS Critical Security Controls v8.1.2 \u2014 Implementation Group 1",
-  "answerTiers": {
-    "full": "Fully implemented",
-    "partial": "Partially implemented",
-    "none": "Not implemented"
+  "version": "2.1.0",
+  "framework": "CIS Critical Security Controls v8.1 \u2014 Implementation Group 1",
+  "impactMap": {
+    "public": "Low",
+    "internal": "Moderate",
+    "customer": "High",
+    "regulated": "High"
+  },
+  "riskMatrix": {
+    "Low": {
+      "Low": "Low",
+      "Moderate": "Low",
+      "High": "Moderate"
+    },
+    "Moderate": {
+      "Low": "Low",
+      "Moderate": "Moderate",
+      "High": "High"
+    },
+    "High": {
+      "Low": "Moderate",
+      "Moderate": "High",
+      "High": "High"
+    }
   },
   "families": [
     {
       "id": "data-protection",
       "name": "Data Protection & Privacy",
-      "maxPoints": 16.67,
+      "citation": "CIS Control 3 \u2014 Data Protection",
+      "riskDescription": "Weaknesses in data handling could expose sensitive information to unauthorized access, loss, or improper disposal.",
       "safeguards": [
-        { "id": "3.1", "title": "Establish and Maintain a Data Management Process", "citation": "CIS Control 3 \u2014 Data Protection", "points": { "full": 3.33, "partial": 1.67, "none": 0 } },
-        { "id": "3.2", "title": "Establish and Maintain a Data Inventory", "citation": "CIS Control 3 \u2014 Data Protection", "points": { "full": 3.33, "partial": 1.67, "none": 0 } },
-        { "id": "3.3", "title": "Configure Data Access Control Lists", "citation": "CIS Control 3 \u2014 Data Protection", "points": { "full": 3.33, "partial": 1.67, "none": 0 } },
-        { "id": "3.4", "title": "Enforce Data Retention", "citation": "CIS Control 3 \u2014 Data Protection", "points": { "full": 3.33, "partial": 1.67, "none": 0 } },
-        { "id": "3.5", "title": "Securely Dispose of Data", "citation": "CIS Control 3 \u2014 Data Protection", "points": { "full": 3.35, "partial": 1.68, "none": 0 } }
+        {
+          "id": "3.1",
+          "title": "Establish and Maintain a Data Management Process",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "3.2",
+          "title": "Establish and Maintain a Data Inventory",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "3.3",
+          "title": "Configure Data Access Control Lists",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "3.4",
+          "title": "Enforce Data Retention",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "3.5",
+          "title": "Securely Dispose of Data",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "3.6",
+          "title": "Encrypt Data on End-User Devices",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        }
       ]
     },
     {
       "id": "access-identity",
       "name": "Access & Identity Management",
-      "maxPoints": 16.66,
+      "citation": "CIS Controls 5 & 6 \u2014 Account Management, Access Control Management",
+      "riskDescription": "Gaps in account and access management increase the risk of unauthorized system or data access.",
       "safeguards": [
-        { "id": "5.1", "title": "Establish and Maintain an Inventory of Accounts", "citation": "CIS Control 5 \u2014 Account Management", "points": { "full": 1.85, "partial": 0.93, "none": 0 } },
-        { "id": "5.2", "title": "Use Unique Passwords", "citation": "CIS Control 5 \u2014 Account Management", "points": { "full": 1.85, "partial": 0.93, "none": 0 } },
-        { "id": "5.3", "title": "Disable Dormant Accounts", "citation": "CIS Control 5 \u2014 Account Management", "points": { "full": 1.85, "partial": 0.93, "none": 0 } },
-        { "id": "5.4", "title": "Restrict Administrator Privileges to Dedicated Administrator Accounts", "citation": "CIS Control 5 \u2014 Account Management", "points": { "full": 1.85, "partial": 0.93, "none": 0 } },
-        { "id": "6.1", "title": "Establish an Access Granting Process", "citation": "CIS Control 6 \u2014 Access Control Management", "points": { "full": 1.85, "partial": 0.93, "none": 0 } },
-        { "id": "6.2", "title": "Establish an Access Revoking Process", "citation": "CIS Control 6 \u2014 Access Control Management", "points": { "full": 1.85, "partial": 0.93, "none": 0 } },
-        { "id": "6.3", "title": "Require MFA for Externally-Exposed Applications", "citation": "CIS Control 6 \u2014 Access Control Management", "points": { "full": 1.85, "partial": 0.93, "none": 0 } },
-        { "id": "6.4", "title": "Require MFA for Remote Network Access", "citation": "CIS Control 6 \u2014 Access Control Management", "points": { "full": 1.85, "partial": 0.93, "none": 0 } },
-        { "id": "6.5", "title": "Require MFA for Administrative Access", "citation": "CIS Control 6 \u2014 Access Control Management", "points": { "full": 1.86, "partial": 0.93, "none": 0 } }
+        {
+          "id": "5.1",
+          "title": "Establish and Maintain an Inventory of Accounts",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "5.2",
+          "title": "Use Unique Passwords",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "5.3",
+          "title": "Disable Dormant Accounts",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "5.4",
+          "title": "Restrict Administrator Privileges to Dedicated Administrator Accounts",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "6.1",
+          "title": "Establish an Access Granting Process",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "6.2",
+          "title": "Establish an Access Revoking Process",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "6.3",
+          "title": "Require MFA for Externally-Exposed Applications",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "6.4",
+          "title": "Require MFA for Remote Network Access",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "6.5",
+          "title": "Require MFA for Administrative Access",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        }
       ]
     },
     {
       "id": "vulnerability-threat",
       "name": "Vulnerability & Threat Management",
-      "maxPoints": 16.67,
+      "citation": "CIS Controls 7 & 10 \u2014 Continuous Vulnerability Management, Malware Defenses",
+      "riskDescription": "Unpatched systems or inadequate malware defenses increase exposure to known exploits and malicious software.",
       "safeguards": [
-        { "id": "7.1", "title": "Establish and Maintain a Vulnerability Management Process", "citation": "CIS Control 7 \u2014 Continuous Vulnerability Management", "points": { "full": 2.78, "partial": 1.39, "none": 0 } },
-        { "id": "7.2", "title": "Establish and Maintain a Remediation Process", "citation": "CIS Control 7 \u2014 Continuous Vulnerability Management", "points": { "full": 2.78, "partial": 1.39, "none": 0 } },
-        { "id": "7.3", "title": "Perform Automated Operating System Patch Management", "citation": "CIS Control 7 \u2014 Continuous Vulnerability Management", "points": { "full": 2.78, "partial": 1.39, "none": 0 } },
-        { "id": "10.1", "title": "Deploy and Maintain Anti-Malware Software", "citation": "CIS Control 10 \u2014 Malware Defenses", "points": { "full": 2.78, "partial": 1.39, "none": 0 } },
-        { "id": "10.2", "title": "Configure Automatic Anti-Malware Signature Updates", "citation": "CIS Control 10 \u2014 Malware Defenses", "points": { "full": 2.78, "partial": 1.39, "none": 0 } },
-        { "id": "10.3", "title": "Disable Autorun and Autoplay for Removable Media", "citation": "CIS Control 10 \u2014 Malware Defenses", "points": { "full": 2.77, "partial": 1.39, "none": 0 } }
+        {
+          "id": "7.1",
+          "title": "Establish and Maintain a Vulnerability Management Process",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "7.2",
+          "title": "Establish and Maintain a Remediation Process",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "7.3",
+          "title": "Perform Automated Operating System Patch Management",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "7.4",
+          "title": "Perform Automated Application Patch Management",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "10.1",
+          "title": "Deploy and Maintain Anti-Malware Software",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "10.2",
+          "title": "Configure Automatic Anti-Malware Signature Updates",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "10.3",
+          "title": "Disable Autorun and Autoplay for Removable Media",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        }
       ]
     },
     {
-      "id": "network-hygiene",
-      "name": "Network & System Hygiene",
-      "maxPoints": 16.66,
+      "id": "asset-recovery",
+      "name": "Asset Inventory & Data Recovery",
+      "citation": "CIS Controls 1 & 11 \u2014 Inventory and Control of Enterprise Assets, Data Recovery",
+      "riskDescription": "Unmanaged assets can go unnoticed, and weak data recovery can prevent restoring systems to a trusted state after an incident.",
       "safeguards": [
-        { "id": "1.1", "title": "Establish and Maintain Detailed Enterprise Asset Inventory", "citation": "CIS Control 1 \u2014 Inventory and Control of Enterprise Assets", "points": { "full": 3.33, "partial": 1.67, "none": 0 } },
-        { "id": "1.2", "title": "Address Unauthorized Assets", "citation": "CIS Control 1 \u2014 Inventory and Control of Enterprise Assets", "points": { "full": 3.33, "partial": 1.67, "none": 0 } },
-        { "id": "11.1", "title": "Establish and Maintain a Data Recovery Process", "citation": "CIS Control 11 \u2014 Data Recovery", "points": { "full": 3.33, "partial": 1.67, "none": 0 } },
-        { "id": "11.2", "title": "Perform Automated Backups", "citation": "CIS Control 11 \u2014 Data Recovery", "points": { "full": 3.33, "partial": 1.67, "none": 0 } },
-        { "id": "11.3", "title": "Protect Recovery Data", "citation": "CIS Control 11 \u2014 Data Recovery", "points": { "full": 3.34, "partial": 1.67, "none": 0 } }
+        {
+          "id": "1.1",
+          "title": "Establish and Maintain Detailed Enterprise Asset Inventory",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "1.2",
+          "title": "Address Unauthorized Assets",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "11.1",
+          "title": "Establish and Maintain a Data Recovery Process",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "11.2",
+          "title": "Perform Automated Backups",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "11.3",
+          "title": "Protect Recovery Data",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "11.4",
+          "title": "Establish and Maintain an Isolated Instance of Recovery Data",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        }
       ]
     },
     {
       "id": "vendor-oversight",
       "name": "Vendor & Service Provider Oversight",
-      "maxPoints": 16.67,
+      "citation": "CIS Control 15 \u2014 Service Provider Management",
+      "riskDescription": "Without a maintained inventory of service providers, this vendor's own third-party risk may go unmanaged.",
       "safeguards": [
-        { "id": "15.1", "title": "Establish and Maintain an Inventory of Service Providers", "citation": "CIS Control 15 \u2014 Service Provider Management", "points": { "full": 16.67, "partial": 8.34, "none": 0 } }
+        {
+          "id": "15.1",
+          "title": "Establish and Maintain an Inventory of Service Providers",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        }
       ]
     },
     {
       "id": "awareness-response",
       "name": "Security Awareness & Incident Response",
-      "maxPoints": 16.67,
+      "citation": "CIS Controls 14 & 17 \u2014 Security Awareness and Skills Training, Incident Response Management",
+      "riskDescription": "Insufficient security training or incident response readiness can slow detection and containment of a security incident.",
       "safeguards": [
-        { "id": "14.1", "title": "Establish and Maintain a Security Awareness Program", "citation": "CIS Control 14 \u2014 Security Awareness and Skills Training", "points": { "full": 1.85, "partial": 0.93, "none": 0 } },
-        { "id": "14.2", "title": "Train Workforce Members to Recognize Social Engineering Attacks", "citation": "CIS Control 14 \u2014 Security Awareness and Skills Training", "points": { "full": 1.85, "partial": 0.93, "none": 0 } },
-        { "id": "14.3", "title": "Train Workforce Members on Authentication Best Practices", "citation": "CIS Control 14 \u2014 Security Awareness and Skills Training", "points": { "full": 1.85, "partial": 0.93, "none": 0 } },
-        { "id": "14.4", "title": "Train Workforce on Data Handling Best Practices", "citation": "CIS Control 14 \u2014 Security Awareness and Skills Training", "points": { "full": 1.85, "partial": 0.93, "none": 0 } },
-        { "id": "14.6", "title": "Train Workforce Members on Recognizing and Reporting Security Incidents", "citation": "CIS Control 14 \u2014 Security Awareness and Skills Training", "points": { "full": 1.85, "partial": 0.93, "none": 0 } },
-        { "id": "14.7", "title": "Train Workforce on How to Identify and Report if Their Enterprise Assets are Missing Security Updates", "citation": "CIS Control 14 \u2014 Security Awareness and Skills Training", "points": { "full": 1.85, "partial": 0.93, "none": 0 } },
-        { "id": "14.8", "title": "Train Workforce on the Dangers of Connecting to and Transmitting Enterprise Data Over Insecure Networks", "citation": "CIS Control 14 \u2014 Security Awareness and Skills Training", "points": { "full": 1.85, "partial": 0.93, "none": 0 } },
-        { "id": "17.1", "title": "Designate Personnel to Manage Incident Handling", "citation": "CIS Control 17 \u2014 Incident Response Management", "points": { "full": 1.85, "partial": 0.93, "none": 0 } },
-        { "id": "17.3", "title": "Establish and Maintain an Enterprise Process for Reporting Incidents", "citation": "CIS Control 17 \u2014 Incident Response Management", "points": { "full": 1.87, "partial": 0.94, "none": 0 } }
+        {
+          "id": "14.1",
+          "title": "Establish and Maintain a Security Awareness Program",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "14.2",
+          "title": "Train Workforce Members to Recognize Social Engineering Attacks",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "14.3",
+          "title": "Train Workforce Members on Authentication Best Practices",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "14.4",
+          "title": "Train Workforce on Data Handling Best Practices",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "14.5",
+          "title": "Train Workforce Members on Causes of Unintentional Data Exposure",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "14.6",
+          "title": "Train Workforce Members on Recognizing and Reporting Security Incidents",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "14.7",
+          "title": "Train Workforce on How to Identify and Report if Their Enterprise Assets are Missing Security Updates",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "14.8",
+          "title": "Train Workforce on the Dangers of Connecting to and Transmitting Enterprise Data Over Insecure Networks",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "17.1",
+          "title": "Designate Personnel to Manage Incident Handling",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "17.2",
+          "title": "Establish and Maintain Contact Information for Reporting Security Incidents",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        },
+        {
+          "id": "17.3",
+          "title": "Establish and Maintain an Enterprise Process for Reporting Incidents",
+          "points": {
+            "full": 2.5,
+            "partial": 1.25,
+            "none": 0
+          }
+        }
       ]
     }
   ]
