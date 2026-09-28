@@ -5,6 +5,17 @@ const button = document.getElementById("run-assessment");
 const seal = document.querySelector(".result-seal");
 const panel = document.querySelector(".result-panel");
 const exportButton = document.getElementById("export-task-sheet");
+let hasResult = false;
+
+function hideExport() {
+  exportButton.hidden = true;
+  exportButton.style.display = "none";
+}
+
+function showExport() {
+  exportButton.hidden = false;
+  exportButton.style.display = "block";
+}
 
 function getAllSafeguardAnswers() {
   const radios = form.querySelectorAll('input[type="radio"]');
@@ -27,9 +38,34 @@ function clearPrintSections() {
   });
 }
 
-function showIncomplete() {
+function showStale() {
+  hasResult = false;
   clearPrintSections();
-  exportButton.style.display = "none";
+  hideExport();
+  seal.textContent = "";
+  seal.classList.add("is-empty");
+  seal.append(
+    makeEl("p", "seal-status", "ANSWERS CHANGED"),
+    makeEl("p", "seal-empty-copy", "Select Get grade to refresh the results.")
+  );
+}
+
+function showUnavailable() {
+  hasResult = false;
+  clearPrintSections();
+  hideExport();
+  seal.textContent = "";
+  seal.classList.add("is-empty");
+  seal.append(
+    makeEl("p", "seal-status", "SCORING UNAVAILABLE"),
+    makeEl("p", "seal-empty-copy", "The scoring engine did not load. Reload this page.")
+  );
+}
+
+function showIncomplete() {
+  hasResult = false;
+  clearPrintSections();
+  hideExport();
   seal.textContent = "";
   seal.classList.add("is-empty");
 
@@ -56,192 +92,162 @@ function riskClass(level) {
   return "risk-low";
 }
 
-function renderExecSummary(result, vendorName) {
-  const wrap = document.createElement("div");
-  wrap.className = "exec-summary";
+function makeEl(tag, className, text) {
+  const el = document.createElement(tag);
+  if (className) el.className = className;
+  if (text !== undefined) el.textContent = text;
+  return el;
+}
 
-  const heading = document.createElement("p");
-  heading.className = "breakdown-heading";
-  heading.textContent = "Executive Summary";
-  wrap.append(heading);
+function makeTile(className, value, label) {
+  const tile = makeEl("div", "exec-tile " + className);
+  tile.append(makeEl("p", "exec-tile-value", value), makeEl("p", "exec-tile-label", label));
+  return tile;
+}
 
-  const meta = document.createElement("p");
-  meta.className = "breakdown-citation";
-  meta.textContent = "Assessment ID: " + result.executiveSummary.assessmentId + "  |  Date: " + result.executiveSummary.date;
-  wrap.append(meta);
-
-  const summaryText = document.createElement("p");
-  summaryText.className = "exec-summary-text";
+function renderExecSummary(result, vendorName, categoryLabel) {
   const es = result.executiveSummary;
-  let exposureText = "no families rated High risk.";
+  const wrap = makeEl("div", "exec-summary");
+
+  const header = makeEl("div", "exec-header");
+  header.append(makeEl("p", "exec-title", "Executive summary"));
+  const meta = makeEl("div", "exec-meta");
+  const idLine = makeEl("p", "", "");
+  idLine.append(makeEl("span", "exec-meta-label", "Assessment ID  "), document.createTextNode(es.assessmentId));
+  const dateLine = makeEl("p", "", "");
+  dateLine.append(makeEl("span", "exec-meta-label", "Date  "), document.createTextNode(es.date));
+  meta.append(idLine, dateLine);
+  header.append(meta);
+  wrap.append(header);
+
+  wrap.append(makeEl("p", "exec-vendor", vendorName + " (" + categoryLabel + ") \u00B7 " + result.framework));
+
+  const tiles = makeEl("div", "exec-tiles");
+  tiles.append(
+    makeTile("exec-tile-total", String(es.totalSafeguards), "Safeguards assessed"),
+    makeTile("exec-tile-full", String(es.fullCount), "Fully implemented"),
+    makeTile("exec-tile-partial", String(es.partialCount), "Partially implemented"),
+    makeTile("exec-tile-none", String(es.noneCount), "Not implemented")
+  );
+  wrap.append(tiles);
+
+  wrap.append(makeEl("p", "exec-narrative", window.ThirdPartyTrust.buildNarrative(result, vendorName).join(" ")));
+
+  const exposure = makeEl("div", "exec-exposure");
+  exposure.append(makeEl("p", "exec-exposure-label", "Primary exposure"));
+  const chips = makeEl("div", "exec-chips");
   if (es.highRiskFamilies.length > 0) {
-    exposureText = "primary exposure in: " + es.highRiskFamilies.join(", ") + ".";
+    es.highRiskFamilies.forEach((name) => {
+      chips.append(makeEl("span", "risk-badge risk-high", name));
+    });
+  } else {
+    chips.append(makeEl("span", "risk-badge risk-low", "No areas rated High risk"));
   }
-  summaryText.textContent =
-    (vendorName || "This vendor") + " scored " + result.grade + " (" + result.score + "/100) against " + result.framework +
-    ". Of 35 evaluated safeguards, " + es.fullCount + " are fully implemented, " + es.partialCount +
-    " partially implemented, and " + es.noneCount + " not implemented. Based on the stated data sensitivity, " + exposureText;
-  wrap.append(summaryText);
+  exposure.append(chips);
+  wrap.append(exposure);
+
+  const controls = [...new Set(result.families.flatMap((f) => f.safeguards.map((s) => parseInt(s.id, 10))))].sort((x, y) => x - y);
+  wrap.append(
+    makeEl(
+      "p",
+      "exec-scope",
+      "Scope: all " + es.totalSafeguards + " IG1 safeguards in " + controls.length + " of the 18 CIS Controls (" + controls.join(", ") + "). " +
+        "The remaining 16 IG1 safeguards, in Controls 2, 4, 8, 9, and 12, are not assessed. " +
+        "Answers are self-reported and not independently verified. " +
+        "Safeguard titles: CIS Controls\u00AE v8.1, Center for Internet Security, Inc. (CC BY-NC-ND 4.0)."
+    )
+  );
 
   panel.append(wrap);
 }
 
 function renderRiskRegister(result) {
-  const wrap = document.createElement("div");
-  wrap.className = "risk-register";
+  const wrap = makeEl("div", "risk-register");
+  wrap.append(makeEl("p", "breakdown-heading", "Risk Register"));
 
-  const heading = document.createElement("p");
-  heading.className = "breakdown-heading";
-  heading.textContent = "Risk Register";
-  wrap.append(heading);
-
-  const table = document.createElement("table");
-  table.className = "register-table";
-
-  const thead = document.createElement("thead");
-  const headRow = document.createElement("tr");
+  const table = makeEl("table", "register-table");
+  const thead = makeEl("thead");
+  const headRow = makeEl("tr");
   ["Risk Area", "Likelihood", "Impact", "Risk Level", "Recommended Action"].forEach((label) => {
-    const th = document.createElement("th");
-    th.textContent = label;
-    headRow.append(th);
+    headRow.append(makeEl("th", "", label));
   });
   thead.append(headRow);
   table.append(thead);
 
-  const tbody = document.createElement("tbody");
+  const tbody = makeEl("tbody");
   result.riskRegister.forEach((entry) => {
-    const row = document.createElement("tr");
+    const row = makeEl("tr");
 
-    const areaCell = document.createElement("td");
-    const areaName = document.createElement("p");
-    areaName.className = "register-area-name";
-    areaName.textContent = entry.family;
-    const areaDesc = document.createElement("p");
-    areaDesc.className = "register-area-desc";
-    areaDesc.textContent = entry.riskDescription;
-    areaCell.append(areaName, areaDesc);
+    const areaCell = makeEl("td");
+    areaCell.append(makeEl("p", "register-area-name", entry.family), makeEl("p", "register-area-desc", entry.riskDescription));
 
-    const likelihoodCell = document.createElement("td");
-    likelihoodCell.textContent = entry.likelihood;
+    const levelCell = makeEl("td");
+    levelCell.append(makeEl("span", "risk-badge " + riskClass(entry.riskLevel), entry.riskLevel));
 
-    const impactCell = document.createElement("td");
-    impactCell.textContent = entry.impact;
-
-    const levelCell = document.createElement("td");
-    const badge = document.createElement("span");
-    badge.className = "risk-badge " + riskClass(entry.riskLevel);
-    badge.textContent = entry.riskLevel;
-    levelCell.append(badge);
-
-    const actionCell = document.createElement("td");
-    actionCell.textContent = entry.recommendedAction;
-
-    row.append(areaCell, likelihoodCell, impactCell, levelCell, actionCell);
+    row.append(
+      areaCell,
+      makeEl("td", "", entry.likelihood),
+      makeEl("td", "", entry.impact),
+      levelCell,
+      makeEl("td", "", entry.recommendedAction)
+    );
     tbody.append(row);
   });
   table.append(tbody);
   wrap.append(table);
+  wrap.append(makeEl("p", "breakdown-citation", "Safeguard numbers refer to the detailed findings that follow."));
 
   panel.append(wrap);
 }
 
 const LEVELS = ["Low", "Moderate", "High"];
 
-// Single source of truth for the heat map's cell coloring -- mirrors the
-// RISK_MATRIX in scoring-engine.js exactly, so the two never drift apart.
-const HEATMAP_RISK_MATRIX = {
-  Low: { Low: "Low", Moderate: "Low", High: "Moderate" },
-  Moderate: { Low: "Low", Moderate: "Moderate", High: "High" },
-  High: { Low: "Moderate", Moderate: "High", High: "High" },
-};
-
 function renderHeatMap(result) {
-  const wrap = document.createElement("div");
-  wrap.className = "risk-heatmap";
+  const wrap = makeEl("div", "risk-heatmap");
+  wrap.append(makeEl("p", "breakdown-heading", "Risk Heat Map"));
 
-  const heading = document.createElement("p");
-  heading.className = "breakdown-heading";
-  heading.textContent = "Risk Heat Map";
-  wrap.append(heading);
-
-  const grid = document.createElement("div");
-  grid.className = "heatmap-grid";
-
-  grid.append(document.createElement("div"));
-  LEVELS.forEach((lvl) => {
-    const colLabel = document.createElement("div");
-    colLabel.className = "heatmap-axis-label";
-    colLabel.textContent = lvl;
-    grid.append(colLabel);
-  });
+  const grid = makeEl("div", "heatmap-grid");
+  grid.append(makeEl("div"));
+  LEVELS.forEach((level) => grid.append(makeEl("div", "heatmap-axis-label", level)));
 
   [...LEVELS].reverse().forEach((impactLevel) => {
-    const rowLabel = document.createElement("div");
-    rowLabel.className = "heatmap-axis-label";
-    rowLabel.textContent = impactLevel;
-    grid.append(rowLabel);
+    grid.append(makeEl("div", "heatmap-axis-label", impactLevel));
 
     LEVELS.forEach((likelihoodLevel) => {
-      const cell = document.createElement("div");
-      const riskLevel = HEATMAP_RISK_MATRIX[impactLevel][likelihoodLevel];
-      cell.className = "heatmap-cell " + riskClass(riskLevel);
+      const cellLevel = window.ThirdPartyTrust.riskMatrix[impactLevel][likelihoodLevel];
+      const cell = makeEl("div", "heatmap-cell " + riskClass(cellLevel));
 
-      const matches = result.riskRegister.filter((r) => r.impact === impactLevel && r.likelihood === likelihoodLevel);
-      matches.forEach((m) => {
-        const chip = document.createElement("span");
-        chip.className = "heatmap-chip";
-        chip.textContent = m.family;
-        cell.append(chip);
-      });
+      result.riskRegister
+        .filter((r) => r.impact === impactLevel && r.likelihood === likelihoodLevel)
+        .forEach((r) => cell.append(makeEl("span", "heatmap-chip", r.family)));
 
       grid.append(cell);
     });
   });
 
   wrap.append(grid);
-
-  const axisNote = document.createElement("p");
-  axisNote.className = "breakdown-citation";
-  axisNote.textContent = "Columns: Likelihood. Rows: Impact.";
-  wrap.append(axisNote);
+  wrap.append(makeEl("p", "breakdown-citation", "Columns: Likelihood. Rows: Impact."));
 
   panel.append(wrap);
 }
 
 function renderBreakdown(result) {
-  const breakdown = document.createElement("div");
-  breakdown.className = "result-breakdown";
-
-  const heading = document.createElement("p");
-  heading.className = "breakdown-heading";
-  heading.textContent = result.framework + " -- v" + result.matrixVersion;
-  breakdown.append(heading);
+  const breakdown = makeEl("div", "result-breakdown");
+  breakdown.append(makeEl("p", "breakdown-heading", result.framework + " -- v" + result.matrixVersion));
 
   result.families.forEach((family) => {
-    const familyHeading = document.createElement("p");
-    familyHeading.className = "breakdown-heading";
-    familyHeading.textContent = family.name + ": " + family.points.toFixed(2) + " / " + family.maxPoints.toFixed(2);
-    breakdown.append(familyHeading);
-
-    const familyCitation = document.createElement("p");
-    familyCitation.className = "breakdown-citation";
-    familyCitation.textContent = family.citation;
-    breakdown.append(familyCitation);
+    breakdown.append(
+      makeEl("p", "breakdown-heading", family.name + ": " + family.points.toFixed(2) + " / " + family.maxPoints.toFixed(2)),
+      makeEl("p", "breakdown-citation", family.citation)
+    );
 
     family.safeguards.forEach((safeguard) => {
-      const row = document.createElement("div");
-      row.className = "breakdown-row";
-
-      const line = document.createElement("p");
-      line.className = "breakdown-line";
-      line.textContent = safeguard.id + " -- " + safeguard.title;
-
-      const detail = document.createElement("p");
-      detail.className = "breakdown-citation";
+      const row = makeEl("div", "breakdown-row");
       const tierLabel = safeguard.tier ? TIER_LABELS[safeguard.tier] : "Not answered";
-      detail.textContent = tierLabel + " -- " + safeguard.points.toFixed(2) + " / " + safeguard.maxPoints.toFixed(2) + " pts";
-
-      row.append(line, detail);
+      row.append(
+        makeEl("p", "breakdown-line", safeguard.id + " -- " + safeguard.title),
+        makeEl("p", "breakdown-citation", tierLabel + " -- " + safeguard.points.toFixed(2) + " / " + safeguard.maxPoints.toFixed(2) + " pts")
+      );
       breakdown.append(row);
     });
   });
@@ -249,45 +255,59 @@ function renderBreakdown(result) {
   panel.append(breakdown);
 }
 
-function showResult(vendorName, result) {
+function showResult(vendorName, categoryLabel, result) {
+  hasResult = true;
   seal.classList.remove("is-empty");
   seal.textContent = "";
-
-  const grade = document.createElement("p");
-  grade.className = "seal-grade";
-  grade.textContent = result.grade;
-
-  const label = document.createElement("p");
-  label.className = "seal-status";
-  label.textContent = vendorName || "Assessment complete";
-
-  const score = document.createElement("p");
-  score.className = "seal-score";
-  score.textContent = result.score + " / 100";
-
-  seal.append(grade, label, score);
+  seal.append(
+    makeEl("p", "seal-grade", result.grade),
+    makeEl("p", "seal-status", vendorName),
+    makeEl("p", "seal-score", result.score.toFixed(2) + " / 100")
+  );
 
   clearPrintSections();
-  renderExecSummary(result, vendorName);
+  renderExecSummary(result, vendorName, categoryLabel);
   renderRiskRegister(result);
   renderHeatMap(result);
   renderBreakdown(result);
 
-  exportButton.style.display = "block";
+  showExport();
 }
 
-button.addEventListener("click", () => {
+function runAssessment() {
+  if (!window.ThirdPartyTrust || typeof window.ThirdPartyTrust.computeAssessment !== "function") {
+    showUnavailable();
+    return;
+  }
+
   const vendorName = document.getElementById("vendor-name").value.trim();
+  const categorySelect = document.getElementById("vendor-category");
   const answers = getAllSafeguardAnswers();
 
   const result = window.ThirdPartyTrust.computeAssessment(answers);
 
-  if (!result.complete) {
+  if (!vendorName || !categorySelect.value || !result.complete) {
     showIncomplete();
     return;
   }
 
-  showResult(vendorName, result);
+  showResult(vendorName, categorySelect.selectedOptions[0].textContent, result);
+}
+
+button.addEventListener("click", runAssessment);
+
+// Pressing Enter in the vendor-name box is an implicit form submission. Without this, the browser would
+// reload the page and put the vendor name and answers in the URL of a request to the host.
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  runAssessment();
+});
+
+// Any edit after grading invalidates the report, so a stale report can never be exported.
+["input", "change"].forEach((type) => {
+  form.addEventListener(type, () => {
+    if (hasResult) showStale();
+  });
 });
 
 exportButton.addEventListener("click", () => {
