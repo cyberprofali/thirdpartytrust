@@ -20,12 +20,12 @@
   <main class="assessment">
     <section class="assessment-form" aria-labelledby="form-heading">
       <h1 id="form-heading">Assess a vendor</h1>
-      <p class="form-intro">Answer each question about the vendor. Nothing here leaves your browser. This assessment follows CIS Critical Security Controls v8.1.2, Implementation Group 1.</p>
+      <p class="form-intro">Answer each question about the vendor. Nothing here leaves your browser. This assessment covers 40 safeguards from CIS Critical Security Controls v8.1, Implementation Group 1.</p>
 
       <form id="assessment-form">
         <div class="field-group">
           <label for="vendor-name">Vendor name</label>
-          <input type="text" id="vendor-name" name="vendor-name" placeholder="e.g. Acme CRM" required>
+          <input type="text" id="vendor-name" name="vendor-name" placeholder="e.g. Acme CRM" maxlength="80" autocomplete="off" required>
         </div>
 
         <div class="field-group">
@@ -53,91 +53,97 @@
         <fieldset class="field-group family-group">
           <legend>Data Protection & Privacy</legend>
           <p class="family-caption">CIS Control 3 — Data Protection</p>
-          <div class="safeguard-item">
-            <p class="safeguard-title">3.1 — Establish and Maintain a Data Management Process</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-3.1">
+            <p class="safeguard-title" id="sg-3.1">3.1 — Establish and Maintain a Data Management Process</p>
             <label class="option"><input type="radio" name="3.1" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="3.1" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="3.1" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">3.2 — Establish and Maintain a Data Inventory</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-3.2">
+            <p class="safeguard-title" id="sg-3.2">3.2 — Establish and Maintain a Data Inventory</p>
             <label class="option"><input type="radio" name="3.2" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="3.2" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="3.2" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">3.3 — Configure Data Access Control Lists</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-3.3">
+            <p class="safeguard-title" id="sg-3.3">3.3 — Configure Data Access Control Lists</p>
             <label class="option"><input type="radio" name="3.3" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="3.3" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="3.3" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">3.4 — Enforce Data Retention</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-3.4">
+            <p class="safeguard-title" id="sg-3.4">3.4 — Enforce Data Retention</p>
             <label class="option"><input type="radio" name="3.4" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="3.4" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="3.4" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">3.5 — Securely Dispose of Data</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-3.5">
+            <p class="safeguard-title" id="sg-3.5">3.5 — Securely Dispose of Data</p>
             <label class="option"><input type="radio" name="3.5" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="3.5" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="3.5" value="none"> Not implemented</label>
+          </div>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-3.6">
+            <p class="safeguard-title" id="sg-3.6">3.6 — Encrypt Data on End-User Devices</p>
+            <label class="option"><input type="radio" name="3.6" value="full" required> Fully implemented</label>
+            <label class="option"><input type="radio" name="3.6" value="partial"> Partially implemented</label>
+            <label class="option"><input type="radio" name="3.6" value="none"> Not implemented</label>
           </div>
         </fieldset>
 
         <fieldset class="field-group family-group">
           <legend>Access & Identity Management</legend>
           <p class="family-caption">CIS Controls 5 & 6 — Account Management, Access Control Management</p>
-          <div class="safeguard-item">
-            <p class="safeguard-title">5.1 — Establish and Maintain an Inventory of Accounts</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-5.1">
+            <p class="safeguard-title" id="sg-5.1">5.1 — Establish and Maintain an Inventory of Accounts</p>
             <label class="option"><input type="radio" name="5.1" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="5.1" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="5.1" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">5.2 — Use Unique Passwords</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-5.2">
+            <p class="safeguard-title" id="sg-5.2">5.2 — Use Unique Passwords</p>
             <label class="option"><input type="radio" name="5.2" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="5.2" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="5.2" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">5.3 — Disable Dormant Accounts</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-5.3">
+            <p class="safeguard-title" id="sg-5.3">5.3 — Disable Dormant Accounts</p>
             <label class="option"><input type="radio" name="5.3" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="5.3" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="5.3" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">5.4 — Restrict Administrator Privileges to Dedicated Administrator Accounts</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-5.4">
+            <p class="safeguard-title" id="sg-5.4">5.4 — Restrict Administrator Privileges to Dedicated Administrator Accounts</p>
             <label class="option"><input type="radio" name="5.4" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="5.4" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="5.4" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">6.1 — Establish an Access Granting Process</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-6.1">
+            <p class="safeguard-title" id="sg-6.1">6.1 — Establish an Access Granting Process</p>
             <label class="option"><input type="radio" name="6.1" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="6.1" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="6.1" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">6.2 — Establish an Access Revoking Process</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-6.2">
+            <p class="safeguard-title" id="sg-6.2">6.2 — Establish an Access Revoking Process</p>
             <label class="option"><input type="radio" name="6.2" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="6.2" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="6.2" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">6.3 — Require MFA for Externally-Exposed Applications</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-6.3">
+            <p class="safeguard-title" id="sg-6.3">6.3 — Require MFA for Externally-Exposed Applications</p>
             <label class="option"><input type="radio" name="6.3" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="6.3" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="6.3" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">6.4 — Require MFA for Remote Network Access</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-6.4">
+            <p class="safeguard-title" id="sg-6.4">6.4 — Require MFA for Remote Network Access</p>
             <label class="option"><input type="radio" name="6.4" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="6.4" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="6.4" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">6.5 — Require MFA for Administrative Access</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-6.5">
+            <p class="safeguard-title" id="sg-6.5">6.5 — Require MFA for Administrative Access</p>
             <label class="option"><input type="radio" name="6.5" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="6.5" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="6.5" value="none"> Not implemented</label>
@@ -147,38 +153,44 @@
         <fieldset class="field-group family-group">
           <legend>Vulnerability & Threat Management</legend>
           <p class="family-caption">CIS Controls 7 & 10 — Continuous Vulnerability Management, Malware Defenses</p>
-          <div class="safeguard-item">
-            <p class="safeguard-title">7.1 — Establish and Maintain a Vulnerability Management Process</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-7.1">
+            <p class="safeguard-title" id="sg-7.1">7.1 — Establish and Maintain a Vulnerability Management Process</p>
             <label class="option"><input type="radio" name="7.1" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="7.1" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="7.1" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">7.2 — Establish and Maintain a Remediation Process</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-7.2">
+            <p class="safeguard-title" id="sg-7.2">7.2 — Establish and Maintain a Remediation Process</p>
             <label class="option"><input type="radio" name="7.2" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="7.2" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="7.2" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">7.3 — Perform Automated Operating System Patch Management</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-7.3">
+            <p class="safeguard-title" id="sg-7.3">7.3 — Perform Automated Operating System Patch Management</p>
             <label class="option"><input type="radio" name="7.3" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="7.3" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="7.3" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">10.1 — Deploy and Maintain Anti-Malware Software</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-7.4">
+            <p class="safeguard-title" id="sg-7.4">7.4 — Perform Automated Application Patch Management</p>
+            <label class="option"><input type="radio" name="7.4" value="full" required> Fully implemented</label>
+            <label class="option"><input type="radio" name="7.4" value="partial"> Partially implemented</label>
+            <label class="option"><input type="radio" name="7.4" value="none"> Not implemented</label>
+          </div>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-10.1">
+            <p class="safeguard-title" id="sg-10.1">10.1 — Deploy and Maintain Anti-Malware Software</p>
             <label class="option"><input type="radio" name="10.1" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="10.1" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="10.1" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">10.2 — Configure Automatic Anti-Malware Signature Updates</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-10.2">
+            <p class="safeguard-title" id="sg-10.2">10.2 — Configure Automatic Anti-Malware Signature Updates</p>
             <label class="option"><input type="radio" name="10.2" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="10.2" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="10.2" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">10.3 — Disable Autorun and Autoplay for Removable Media</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-10.3">
+            <p class="safeguard-title" id="sg-10.3">10.3 — Disable Autorun and Autoplay for Removable Media</p>
             <label class="option"><input type="radio" name="10.3" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="10.3" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="10.3" value="none"> Not implemented</label>
@@ -186,45 +198,51 @@
         </fieldset>
 
         <fieldset class="field-group family-group">
-          <legend>Network & System Hygiene</legend>
-          <p class="family-caption">CIS Controls 1 & 11 — Enterprise Asset Inventory, Data Recovery</p>
-          <div class="safeguard-item">
-            <p class="safeguard-title">1.1 — Establish and Maintain Detailed Enterprise Asset Inventory</p>
+          <legend>Asset Inventory & Data Recovery</legend>
+          <p class="family-caption">CIS Controls 1 & 11 — Inventory and Control of Enterprise Assets, Data Recovery</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-1.1">
+            <p class="safeguard-title" id="sg-1.1">1.1 — Establish and Maintain Detailed Enterprise Asset Inventory</p>
             <label class="option"><input type="radio" name="1.1" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="1.1" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="1.1" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">1.2 — Address Unauthorized Assets</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-1.2">
+            <p class="safeguard-title" id="sg-1.2">1.2 — Address Unauthorized Assets</p>
             <label class="option"><input type="radio" name="1.2" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="1.2" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="1.2" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">11.1 — Establish and Maintain a Data Recovery Process</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-11.1">
+            <p class="safeguard-title" id="sg-11.1">11.1 — Establish and Maintain a Data Recovery Process</p>
             <label class="option"><input type="radio" name="11.1" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="11.1" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="11.1" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">11.2 — Perform Automated Backups</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-11.2">
+            <p class="safeguard-title" id="sg-11.2">11.2 — Perform Automated Backups</p>
             <label class="option"><input type="radio" name="11.2" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="11.2" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="11.2" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">11.3 — Protect Recovery Data</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-11.3">
+            <p class="safeguard-title" id="sg-11.3">11.3 — Protect Recovery Data</p>
             <label class="option"><input type="radio" name="11.3" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="11.3" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="11.3" value="none"> Not implemented</label>
+          </div>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-11.4">
+            <p class="safeguard-title" id="sg-11.4">11.4 — Establish and Maintain an Isolated Instance of Recovery Data</p>
+            <label class="option"><input type="radio" name="11.4" value="full" required> Fully implemented</label>
+            <label class="option"><input type="radio" name="11.4" value="partial"> Partially implemented</label>
+            <label class="option"><input type="radio" name="11.4" value="none"> Not implemented</label>
           </div>
         </fieldset>
 
         <fieldset class="field-group family-group">
           <legend>Vendor & Service Provider Oversight</legend>
           <p class="family-caption">CIS Control 15 — Service Provider Management</p>
-          <div class="safeguard-item">
-            <p class="safeguard-title">15.1 — Establish and Maintain an Inventory of Service Providers</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-15.1">
+            <p class="safeguard-title" id="sg-15.1">15.1 — Establish and Maintain an Inventory of Service Providers</p>
             <label class="option"><input type="radio" name="15.1" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="15.1" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="15.1" value="none"> Not implemented</label>
@@ -234,56 +252,68 @@
         <fieldset class="field-group family-group">
           <legend>Security Awareness & Incident Response</legend>
           <p class="family-caption">CIS Controls 14 & 17 — Security Awareness and Skills Training, Incident Response Management</p>
-          <div class="safeguard-item">
-            <p class="safeguard-title">14.1 — Establish and Maintain a Security Awareness Program</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-14.1">
+            <p class="safeguard-title" id="sg-14.1">14.1 — Establish and Maintain a Security Awareness Program</p>
             <label class="option"><input type="radio" name="14.1" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="14.1" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="14.1" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">14.2 — Train Workforce Members to Recognize Social Engineering Attacks</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-14.2">
+            <p class="safeguard-title" id="sg-14.2">14.2 — Train Workforce Members to Recognize Social Engineering Attacks</p>
             <label class="option"><input type="radio" name="14.2" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="14.2" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="14.2" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">14.3 — Train Workforce Members on Authentication Best Practices</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-14.3">
+            <p class="safeguard-title" id="sg-14.3">14.3 — Train Workforce Members on Authentication Best Practices</p>
             <label class="option"><input type="radio" name="14.3" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="14.3" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="14.3" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">14.4 — Train Workforce on Data Handling Best Practices</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-14.4">
+            <p class="safeguard-title" id="sg-14.4">14.4 — Train Workforce on Data Handling Best Practices</p>
             <label class="option"><input type="radio" name="14.4" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="14.4" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="14.4" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">14.6 — Train Workforce Members on Recognizing and Reporting Security Incidents</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-14.5">
+            <p class="safeguard-title" id="sg-14.5">14.5 — Train Workforce Members on Causes of Unintentional Data Exposure</p>
+            <label class="option"><input type="radio" name="14.5" value="full" required> Fully implemented</label>
+            <label class="option"><input type="radio" name="14.5" value="partial"> Partially implemented</label>
+            <label class="option"><input type="radio" name="14.5" value="none"> Not implemented</label>
+          </div>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-14.6">
+            <p class="safeguard-title" id="sg-14.6">14.6 — Train Workforce Members on Recognizing and Reporting Security Incidents</p>
             <label class="option"><input type="radio" name="14.6" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="14.6" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="14.6" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">14.7 — Train Workforce on How to Identify and Report if Their Enterprise Assets are Missing Security Updates</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-14.7">
+            <p class="safeguard-title" id="sg-14.7">14.7 — Train Workforce on How to Identify and Report if Their Enterprise Assets are Missing Security Updates</p>
             <label class="option"><input type="radio" name="14.7" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="14.7" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="14.7" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">14.8 — Train Workforce on the Dangers of Connecting to and Transmitting Enterprise Data Over Insecure Networks</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-14.8">
+            <p class="safeguard-title" id="sg-14.8">14.8 — Train Workforce on the Dangers of Connecting to and Transmitting Enterprise Data Over Insecure Networks</p>
             <label class="option"><input type="radio" name="14.8" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="14.8" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="14.8" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">17.1 — Designate Personnel to Manage Incident Handling</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-17.1">
+            <p class="safeguard-title" id="sg-17.1">17.1 — Designate Personnel to Manage Incident Handling</p>
             <label class="option"><input type="radio" name="17.1" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="17.1" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="17.1" value="none"> Not implemented</label>
           </div>
-          <div class="safeguard-item">
-            <p class="safeguard-title">17.3 — Establish and Maintain an Enterprise Process for Reporting Incidents</p>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-17.2">
+            <p class="safeguard-title" id="sg-17.2">17.2 — Establish and Maintain Contact Information for Reporting Security Incidents</p>
+            <label class="option"><input type="radio" name="17.2" value="full" required> Fully implemented</label>
+            <label class="option"><input type="radio" name="17.2" value="partial"> Partially implemented</label>
+            <label class="option"><input type="radio" name="17.2" value="none"> Not implemented</label>
+          </div>
+          <div class="safeguard-item" role="radiogroup" aria-labelledby="sg-17.3">
+            <p class="safeguard-title" id="sg-17.3">17.3 — Establish and Maintain an Enterprise Process for Reporting Incidents</p>
             <label class="option"><input type="radio" name="17.3" value="full" required> Fully implemented</label>
             <label class="option"><input type="radio" name="17.3" value="partial"> Partially implemented</label>
             <label class="option"><input type="radio" name="17.3" value="none"> Not implemented</label>
@@ -298,12 +328,13 @@
         <p class="seal-status">AWAITING ASSESSMENT</p>
         <p class="seal-empty-copy">Complete the questionnaire to generate a grade.</p>
       </div>
-      <button type="button" id="export-task-sheet" class="primary-action" style="display: none;">Export task sheet</button>
+      <button type="button" id="export-task-sheet" class="primary-action" hidden>Export task sheet</button>
     </aside>
   </main>
 
   <footer class="site-footer">
     <p>Nothing entered here is sent to a server. Scoring runs entirely on this page.</p>
+    <p class="footer-attribution">Safeguard titles: CIS Controls&reg; v8.1, Center for Internet Security, Inc. (CC BY-NC-ND 4.0) &middot; <a href="https://www.cisecurity.org/controls/" target="_blank" rel="noopener noreferrer">cisecurity.org/controls</a> &middot; <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode" target="_blank" rel="noopener noreferrer">License terms</a></p>
   </footer>
 
   <script src="scripts/scoring-engine.js"></script>
