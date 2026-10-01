@@ -35,6 +35,11 @@ body {
   font-size: 0.95rem;
 }
 
+/* Hidden on screen; print.css reveals it only inside @media print. */
+.print-subtitle {
+  display: none;
+}
+
 .assessment {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
@@ -51,7 +56,7 @@ body {
 }
 
 .form-intro {
-  color: var(--slate-gray);
+  color: var(--charcoal);
   margin-top: 0;
   margin-bottom: 1.5rem;
 }
@@ -109,7 +114,7 @@ body {
 .family-caption {
   font-family: var(--font-data);
   font-size: 0.78rem;
-  color: var(--slate-gray);
+  color: var(--charcoal);
   margin: 0.25rem 0 1rem;
 }
 
@@ -127,14 +132,16 @@ body {
 
 .safeguard-item::before {
   counter-increment: safeguard-counter;
-  content: "Question " counter(safeguard-counter) " of 35";
+  content: "Question " counter(safeguard-counter) " of 40";
   display: block;
   font-family: var(--font-data);
   font-size: 0.7rem;
-  color: var(--gold-signal);
+  color: var(--charcoal);
   letter-spacing: 0.04em;
   text-transform: uppercase;
   margin-bottom: 0.35rem;
+  border-left: 3px solid var(--gold-signal);
+  padding-left: 0.5rem;
 }
 
 .safeguard-title {
@@ -229,7 +236,7 @@ button:focus-visible {
 .breakdown-heading {
   font-family: var(--font-data);
   font-size: 0.75rem;
-  color: var(--slate-gray);
+  color: var(--charcoal);
   letter-spacing: 0.03em;
   margin: 0 0 0.75rem;
   text-transform: uppercase;
@@ -257,17 +264,142 @@ button:focus-visible {
   margin: 0.15rem 0 0;
 }
 
-.exec-summary-text {
-  font-size: 0.9rem;
+.exec-summary {
+  border-top: 3px solid var(--gold-signal);
+  padding: 1.25rem 1.5rem;
+}
+
+.exec-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.exec-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin: 0;
+  color: var(--ink-black);
+}
+
+.exec-meta {
+  font-family: var(--font-data);
+  font-size: 0.72rem;
+  line-height: 1.6;
+  text-align: right;
+  color: var(--charcoal);
+}
+
+.exec-meta p {
+  margin: 0;
+}
+
+.exec-meta-label {
+  color: var(--charcoal);
+}
+
+.seal-status,
+.exec-vendor,
+.exec-narrative,
+.register-area-name {
+  overflow-wrap: anywhere;
+}
+
+.exec-vendor {
+  font-size: 0.82rem;
+  color: var(--charcoal);
+  margin: 0.25rem 0 0;
+}
+
+.exec-tiles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.exec-tile {
+  border: 1px solid var(--fog-gray);
+  padding: 0.7rem 0.4rem;
+  text-align: center;
+}
+
+.exec-tile-value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.6rem;
+  line-height: 1.15;
+  margin: 0;
+  color: var(--ink-black);
+}
+
+.exec-tile-label {
+  font-size: 0.68rem;
+  color: var(--charcoal);
+  margin: 0.35rem 0 0;
+}
+
+.exec-tile-total {
+  border-top: 3px solid var(--ink-black);
+}
+
+.exec-tile-full {
+  border-top: 3px solid var(--verified-green);
+}
+
+.exec-tile-partial {
+  border-top: 3px solid var(--caution-amber);
+}
+
+.exec-tile-none {
+  border-top: 3px solid var(--alert-red);
+}
+
+.exec-narrative {
+  font-size: 0.86rem;
+  line-height: 1.6;
+  margin: 0 0 1rem;
+  color: var(--ink-black);
+}
+
+.exec-exposure-label {
+  font-family: var(--font-data);
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  margin: 0 0 0.4rem;
+}
+
+.exec-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.exec-scope {
+  font-size: 0.72rem;
   line-height: 1.5;
-  margin: 0.5rem 0 0;
+  color: var(--charcoal);
+  border-top: 1px solid var(--fog-gray);
+  padding-top: 0.6rem;
+  margin: 1rem 0 0;
 }
 
 .register-table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
   font-size: 0.82rem;
 }
+
+.register-table th:nth-child(1) { width: 30%; }
+.register-table th:nth-child(2) { width: 12%; }
+.register-table th:nth-child(3) { width: 11%; }
+.register-table th:nth-child(4) { width: 13%; }
+.register-table th:nth-child(5) { width: 34%; }
 
 .register-table th {
   text-align: left;
@@ -275,7 +407,7 @@ button:focus-visible {
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.03em;
-  color: var(--slate-gray);
+  color: var(--charcoal);
   padding: 0.5rem 0.5rem;
   border-bottom: 2px solid var(--ink-black);
 }
@@ -292,7 +424,7 @@ button:focus-visible {
 }
 
 .register-area-desc {
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   color: var(--charcoal);
   margin: 0;
 }
@@ -314,6 +446,10 @@ button:focus-visible {
   background: var(--caution-amber);
 }
 
+.risk-badge.risk-moderate {
+  color: var(--ink-black);
+}
+
 .risk-high {
   background: var(--alert-red);
 }
@@ -321,13 +457,14 @@ button:focus-visible {
 .heatmap-grid {
   display: grid;
   grid-template-columns: 70px repeat(3, 1fr);
+  grid-template-rows: auto repeat(3, minmax(64px, auto));
   gap: 4px;
 }
 
 .heatmap-axis-label {
   font-family: var(--font-data);
   font-size: 0.7rem;
-  color: var(--slate-gray);
+  color: var(--charcoal);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -347,7 +484,7 @@ button:focus-visible {
 }
 
 .heatmap-chip {
-  background: rgba(255, 255, 255, 0.85);
+  background: #FFFFFF;
   color: var(--ink-black);
   font-size: 0.62rem;
   font-weight: 600;
@@ -356,9 +493,23 @@ button:focus-visible {
   line-height: 1.2;
 }
 
+.risk-register > .breakdown-citation {
+  margin-top: 0.6rem;
+}
+
+.footer-attribution {
+  font-size: 0.75rem;
+  margin: 0.5rem auto 0;
+  max-width: 46rem;
+}
+
+.site-footer a {
+  color: inherit;
+}
+
 .site-footer {
   text-align: center;
-  color: var(--slate-gray);
+  color: var(--charcoal);
   font-size: 0.85rem;
   padding: 1.5rem;
 }
