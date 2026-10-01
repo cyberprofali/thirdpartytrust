@@ -45,11 +45,11 @@
   .result-panel {
     position: static;
     max-width: 100%;
-    margin: 2rem 0 0;
+    margin: 1rem 0 0;
   }
 
   .result-seal {
-    max-width: 320px;
+    max-width: 260px;
     margin: 0 auto;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
@@ -64,13 +64,36 @@
     print-color-adjust: exact;
   }
 
-  .exec-summary {
-    page-break-before: always;
+  .exec-summary,
+  .risk-heatmap {
+    page-break-inside: avoid;
+    break-inside: avoid;
   }
 
-  .register-table,
-  .heatmap-grid {
+  .exec-summary {
+    padding: 1rem 1.25rem;
+  }
+
+  .exec-tiles {
+    margin: 0.75rem 0;
+  }
+
+  .exec-narrative {
+    margin-bottom: 0.75rem;
+  }
+
+  .exec-scope {
+    margin-top: 0.75rem;
+  }
+
+  .risk-register {
     page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .register-table tr {
+    page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   .risk-badge,
