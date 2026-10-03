@@ -125,7 +125,7 @@ The export button is hidden from printed output with a `!important` rule, becaus
 
 ## Design history
 
-- Expanded from an original 3-control version to full IG1 coverage of the 10 controls above, following instructor feedback that narrower coverage was not realistically useful to an organization.
+- Expanded from an original 3-control version to full IG1 coverage of the 10 controls above.
 - An earlier build listed 35 safeguards across 9 controls. A line-by-line re-check against the CIS guide found the correct figure of 40 across 10, and every title was matched word for word.
 - The family previously named Network & System Hygiene was renamed Asset Inventory & Data Recovery, since the old name implied network controls (Controls 12 and 13) that are not assessed.
 - Equal-per-family weighting was replaced by equal-per-safeguard weighting, for the reason given under Scoring methodology.
